@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
+
+import api from "../../services/api";
 
 function Register() {
 
@@ -40,14 +41,11 @@ const navigate = useNavigate();
 
   try {
 
-    await axios.post("http://localhost:8085/register", {
-
-      username: username.trim(),
-
-      email: email.trim().toLowerCase(),
-      password: password,
-
-    });
+   await api.post("/register", {
+  username: username.trim(),
+  email: email.trim().toLowerCase(),
+  password: password,
+});
 
     navigate("/login", {
 

@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { Link, useNavigate, useLocation} from "react-router-dom";
 
-import axios from "axios";
 
+import api from "../../services/api";
 
 
 function Login() {
@@ -55,19 +55,10 @@ const handleLogin = async (e) => {
 
   try {
 
-    const response = await axios.post(
-
-      "http://localhost:8085/login",
-
-      {
-
-        username: username.trim(),
-
-        password: password,
-
-      }
-
-    );
+    const response = await api.post("/login", {
+  username: username.trim(),
+  password: password,
+});
 
 
 
@@ -156,10 +147,7 @@ const handleLogin = async (e) => {
 
     setForgotLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:8085/forgot-password",
-        { email }
-      );
+    const response = await api.post("/forgot-password", { email });
       setForgotMessage(
         response.data?.message ||
           "If an account with that email exists, a password reset link has been sent."
